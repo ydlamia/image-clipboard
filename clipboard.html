@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #chart {
+        width: 1000px;
+        height: 70vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chart"></div>
+    <button class="copybutton">copy</button>
+    <!-- <canvas></canvas> -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+      const button = document.querySelector(".copybutton");
+      //   const canvas = document.createElement("canvas");
+      //   canvas.width = 100;
+      //   canvas.height = 100;
+      //   document.body.appendChild(canvas);
+      //   const ctx = canvas.getContext("2d");
+      //   ctx.fillRect(0, 0, canvas.width, canvas.height);
+      //   ctx.fillStyle = "#eee";
+      //   ctx.fillRect(10, 10, 50, 50);
+      var options = {
+        chart: {
+          type: "line"
+        },
+        series: [
+          {
+            name: "sales",
+            data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
+          }
+        ],
+        xaxis: {
+          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+        }
+      };
+
+      var chart = new ApexCharts(document.querySelector("#chart"), options);
+
+      chart.render();
+      //   canvas.toBlob(function(blob) {
+      //     const item = new ClipboardItem({ "image/png": blob });
+      //     navigator.clipboard.write([item]);
+      //     // alert("Copied! paste it on paint");
+      //   });
+
+      button.addEventListener("click", () => {
+        chart.toBlob(function(blob) {
+          const item = new ClipboardItem({ "image/png": blob });
+          navigator.clipboard.write([item]);
+          // alert("Copied! paste it on paint");
+        });
+      });
+    </script>
+  </body>
+</html>
